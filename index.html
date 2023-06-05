@@ -2,10 +2,14 @@
 <html>
 	<head>
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Patrick+Hand" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@200&family=Questrial&family=Roboto+Mono&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-deep_orange.min.css" />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5840834268638676"
+     crossorigin="anonymous"></script>
 		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 		<style>
 			.hbhgame {
@@ -29,6 +33,7 @@
 		var totalPage = 0;
 		var pages = [];
 		var pageMode = true;
+		
 		function showToast(msg) {
 			var snackbarContainer = document.getElementById('toast');
 			var data = {message: msg};
@@ -111,6 +116,7 @@
 		function viewTopGame(index) {
 			document.getElementById("topgamecard").style.backgroundImage = "url("+ "https://raw.githubusercontent.com/HBNHGAME/HBNHGAME.github.io/main/GameVietHoa/" + topgames[index - 1].preview + ")";
 			document.getElementById("topgamedesp").innerHTML = getGameDesp(topgames[index - 1]);
+			curTopGame = index;
 		}
 		function buildSubGameList(index) {
 			var uicontent = '';
@@ -273,6 +279,7 @@
 				
 			showToast("Danh sách trò chơi cập nhật");
 		}
+		var curTopGame = 1;
 		function ready() {
 			game = JSON.parse(b64DecodeUnicode(db));
 			topgames.push(game.games[game.games.length - 1]);
@@ -286,6 +293,13 @@
 			document.getElementById("hbhgameinfo").innerText = game.games.length + " trò chơi đã được Việt Hóa.";
 			
 			viewTopGame(1);
+			
+			setInterval(()=>{
+				curTopGame++;
+				if(curTopGame > 3)
+					curTopGame = 1;
+				viewTopGame(curTopGame);
+			},5000);
 		}
 		</script>
    	</head>
