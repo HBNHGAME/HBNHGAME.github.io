@@ -338,7 +338,7 @@
 			};
 		}
 		async function getNews() {
-		  const response = await fetch("news.json");
+		  const response = await fetch("file:///C:/myPersonalServer/download/news.json");
 		  const news = await response.json();
 		  alert(news);
 		}
